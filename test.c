@@ -35,7 +35,7 @@ f(const char *s, const char *s1) {
 		return;
 	}
 
-	buffer *out = fixedXor(bufI, bufI1);
+	buffer *out = xorAlloc(bufI, bufI1->b[0]);
 	if (out == NULL) {
 		fprintf(stderr, "error\n");
 		return;
@@ -43,7 +43,6 @@ f(const char *s, const char *s1) {
 
 	bufferFree(bufI);
 	bufferFree(bufI1);
-
 
 	/*
 	buffer *o = base64EncodeAlloc(bufI);
