@@ -1,9 +1,9 @@
 // Prints all possible single byte XOR codings of a string, sorted by proximity of the
 // english letter frequency stats.
 
+#include <ctype.h>  // isalnum
 #include <stdio.h>  // fputc
 #include <stdlib.h> // qsort
-#include <string.h> // strlen
 
 #include "alphabet/alphabet.h"
 #include "buffer/buffer.h"
@@ -63,7 +63,7 @@ static void
 printArr(void) {
 	int i;
 	for (i = 0; i < ARRAY_SIZE(arr); i++) {
-		if (arr[i].distance < 0.1) {
+		if (arr[i].distance < 0.046875) {
 			fprintf(stdout, "%20g %2x ", arr[i].distance, arr[i].key);
 			pr(arr[i].b);
 			fputc('\n', stdout);
@@ -72,31 +72,55 @@ printArr(void) {
 	fputc('\n', stdout);
 }
 
+static unsigned char stringBuf[1 << 10];
+
 static void
-f(const char *s) {
-	buffer si;
+f(void) {
+	for (;;) {
+		buffer si;
+		int i = 0;
+		int chr;
+		for (;;) {
+			chr = fgetc(stdin);
+			if (chr == EOF || !isalnum(chr)) {
+				break;
+			}
+			stringBuf[i] = chr;
+			i++;
+		}
+		for (; chr != EOF;) {
+			chr = fgetc(stdin);
+			if (isalnum(chr)) {
+				ungetc(chr, stdin);
+				break;
+			}
+		}
+		si.b = stringBuf;
+		si.l = i;
+		buffer *bufI = hexDecodeAlloc(&si);
+		if (bufI == NULL) {
+			fprintf(stderr, "error\n");
+			return;
+		}
 
-	si.b = (unsigned char *)s;
-	si.l = strlen(s);
+		bruteAndSort(bufI);
 
-	buffer *bufI = hexDecodeAlloc(&si);
-	if (bufI == NULL) {
-		fprintf(stderr, "error\n");
-		return;
+		pr(&si);
+		fputc('\n', stdout);
+
+		printArr();
+
+		bufferFree(bufI);
+		freeArr();
+
+		if (chr == EOF) {
+			break;
+		}
 	}
-
-	bruteAndSort(bufI);
-	printArr();
-
-	freeArr();
-	bufferFree(bufI);
 }
 
 int
-main(int argc, char *argv[]) {
-	if (argc != 2) {
-		return 1;
-	}
-	f(argv[1]);
+main(void) {
+	f();
 	return 0;
 }
