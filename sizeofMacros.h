@@ -7,7 +7,8 @@
 // differently.
 
 // <stdio.h> fread fwrite
-// ...
+#define FREAD(B, N, F) fread((B), sizeof((B)[0]), (N), (F))
+#define FWRITE(B, N, F) fwrite((B), sizeof((B)[0]), (N), (F))
 
 // <stdlib.h> calloc malloc realloc bsearch qsort
 #define MALLOC(P, N) (P) = malloc((N) * sizeof(*(P)))

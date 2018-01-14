@@ -32,13 +32,13 @@ bruteAndSort(buffer *buf) {
 	int k;
 	for (k = 0; k < ARRAY_SIZE(arr); k++) {
 		unsigned char key = k;
-		double freqs[28];
+		double freqs[alphabetSize];
 
 		arr[key].key = key;
 		arr[key].b = xorAlloc(buf, key);
 
 		freqCount(arr[key].b, freqs);
-		arr[key].distance = freqScore(freqs);
+		arr[key].distance = freqScore(freqs, sumOfSquares);
 	}
 	QSORT(arr, ARRAY_SIZE(arr), qsortCompar);
 }
