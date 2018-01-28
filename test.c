@@ -37,8 +37,8 @@ bruteAndSort(buffer *buf) {
 		arr[key].key = key;
 		arr[key].b = xorAlloc(buf, key);
 
-		freqCount(arr[key].b, freqs);
-		arr[key].distance = freqScore(freqs, sumOfSquares);
+		monographFreqCount(arr[key].b, freqs);
+		arr[key].distance = monographFreqScore(freqs, sumOfSquares);
 	}
 	QSORT(arr, ARRAY_SIZE(arr), qsortCompar);
 }

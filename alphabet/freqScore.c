@@ -11,12 +11,12 @@ static const double enAlphabetFrequencies[alphabetSize] = {
 	.0673, .0894, .0268, .0106, .0183, .0019, .0172, .0011};
 
 double
-freqScore(const double freqs[], distanceFunc f) {
+monographFreqScore(const double freqs[], distanceFunc f) {
 	return f(freqs, enAlphabetFrequencies, alphabetSize);
 }
 
 bool
 seemsLikeAPlaintextByMonographCount(const double freqs[], distanceFunc f) {
-	return freqScore(freqs, f) <
+	return monographFreqScore(freqs, f) <
 	       monographCountPlaintextySumOfSquaresDistanceLimit;
 }

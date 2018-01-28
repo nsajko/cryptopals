@@ -28,7 +28,7 @@ monographCount(const buffer *in, double freqsOut[]) {
 }
 
 void
-freqCount(const buffer *in, double freqsOut[]) {
+monographFreqCount(const buffer *in, double freqsOut[]) {
 	size_t i;
 	const int l = alphabetSize;
 	double sum = monographCount(in, freqsOut);

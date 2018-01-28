@@ -11,11 +11,11 @@ static const double monographCountPlaintextySumOfSquaresDistanceLimit = 0.046875
 		    digraphCountPlaintextySumOfSquaresDistanceLimit = 0.00035;
 
 extern double monographCount(const buffer *in, double freqsOut[]);
-extern void freqCount(const buffer *in, double freqsOut[]);
+extern void monographFreqCount(const buffer *in, double freqsOut[]);
 extern double digraphCount(const buffer *in, double freqsOut[][alphabetSize]);
 extern void digraphFreqCount(const buffer *in, double freqsOut[][alphabetSize]);
 
-extern double freqScore(const double freqs[], distanceFunc f);
+extern double monographFreqScore(const double freqs[], distanceFunc f);
 extern bool seemsLikeAPlaintextByMonographCount(const double freqs[], distanceFunc f);
 
 extern double digraphFreqScore(const double freqs[][alphabetSize], distanceFunc f);
