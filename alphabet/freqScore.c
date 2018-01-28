@@ -17,5 +17,6 @@ freqScore(const double freqs[], distanceFunc f) {
 
 bool
 seemsLikeAPlaintextByMonographCount(const double freqs[], distanceFunc f) {
-	return freqScore(freqs, f) < 0.046875;
+	return freqScore(freqs, f) <
+	       monographCountPlaintextySumOfSquaresDistanceLimit;
 }

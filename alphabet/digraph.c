@@ -743,6 +743,6 @@ digraphFreqScore(const double freqs[][alphabetSize], distanceFunc f) {
 
 bool
 seemsLikeAPlaintextByDigraphCount(const double freqs[][alphabetSize], distanceFunc f) {
-	// Closer to natural than a null string.
-	return digraphFreqScore(freqs, f) < 0.0006103515625;
+	return digraphFreqScore(freqs, f) <
+	       digraphCountPlaintextySumOfSquaresDistanceLimit;
 }

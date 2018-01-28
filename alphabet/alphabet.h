@@ -7,6 +7,9 @@
 
 enum { alphabetSize = 26 };
 
+static const double monographCountPlaintextySumOfSquaresDistanceLimit = 0.046875,
+		    digraphCountPlaintextySumOfSquaresDistanceLimit = 0.00035;
+
 extern double monographCount(const buffer *in, double freqsOut[]);
 extern void freqCount(const buffer *in, double freqsOut[]);
 extern double digraphCount(const buffer *in, double freqsOut[][alphabetSize]);
