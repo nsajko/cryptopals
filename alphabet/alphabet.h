@@ -7,7 +7,9 @@
 
 enum { alphabetSize = 26 };
 
+extern double monographCount(const buffer *in, double freqsOut[]);
 extern void freqCount(const buffer *in, double freqsOut[]);
+extern double digraphCount(const buffer *in, double freqsOut[][alphabetSize]);
 extern void digraphFreqCount(const buffer *in, double freqsOut[][alphabetSize]);
 
 extern double freqScore(const double freqs[], distanceFunc f);

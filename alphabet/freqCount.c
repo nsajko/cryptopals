@@ -1,16 +1,17 @@
 #include <ctype.h>
 #include <stddef.h>
 
-#include "alphabet.h"
 #include "../buffer/buffer.h"
+#include "alphabet.h"
 
 static unsigned char
 alphaToIndex(unsigned char c) {
 	return tolower(c) - 'a';
 }
 
-void
-freqCount(const buffer *in, double freqsOut[]) {
+// Returns count of alphabetic characters.
+double
+monographCount(const buffer *in, double freqsOut[]) {
 	double sum = 0;
 	size_t i;
 	const int l = alphabetSize;
@@ -23,6 +24,14 @@ freqCount(const buffer *in, double freqsOut[]) {
 			sum++;
 		}
 	}
+	return sum;
+}
+
+void
+freqCount(const buffer *in, double freqsOut[]) {
+	size_t i;
+	const int l = alphabetSize;
+	double sum = monographCount(in, freqsOut);
 	if (sum != 0) {
 		for (i = 0; i < l; i++) {
 			freqsOut[i] /= sum;
@@ -30,8 +39,9 @@ freqCount(const buffer *in, double freqsOut[]) {
 	}
 }
 
-void
-digraphFreqCount(const buffer *in, double freqsOut[][alphabetSize]) {
+// Returns count of alphabetic characters.
+double
+digraphCount(const buffer *in, double freqsOut[][alphabetSize]) {
 	double sum = 0;
 	size_t i, oldI;
 	int j;
@@ -50,6 +60,14 @@ digraphFreqCount(const buffer *in, double freqsOut[][alphabetSize]) {
 			oldI = i;
 		}
 	}
+	return sum;
+}
+
+void
+digraphFreqCount(const buffer *in, double freqsOut[][alphabetSize]) {
+	int i, j;
+	const int l = alphabetSize;
+	double sum = digraphCount(in, freqsOut);
 	if (sum != 0) {
 		for (i = 0; i < l; i++) {
 			for (j = 0; j < l; j++) {
