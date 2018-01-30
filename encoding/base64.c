@@ -78,7 +78,7 @@ base64Encode(const buffer *in, buffer *out) {
 	out->l = o;
 }
 
-// Ignores '\r' and '\n'
+// Does not ignore '\r' or '\n'. Use: tr -d '\n\r'
 // Returns place where an error happened, or -1 if no error occured.
 static int
 base64Decode(const buffer *in, buffer *out) {
