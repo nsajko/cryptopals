@@ -738,7 +738,7 @@ static const double enDigraphFreqs[alphabetSize][alphabetSize] = {
 
 double
 digraphFreqScore(const double freqs[][alphabetSize], distanceFunc f) {
-	return f(freqs, enDigraphFreqs, alphabetSize);
+	return f(&(freqs[0][0]), &(enDigraphFreqs[0][0]), alphabetSize);
 }
 
 bool
