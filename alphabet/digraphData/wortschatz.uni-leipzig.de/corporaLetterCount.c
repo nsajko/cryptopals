@@ -1,3 +1,7 @@
+// Copyright 2018 (c), Neven Sajko. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be found in the
+// LICENSE file.
+
 // Reads from stdin while counting alphabetic letters and digraphs (as if non-alphabetic
 // bytes were ignored), then prints counts and frequencies. "Alphabetic" means [A-Za-z]+
 // (in regexp terms).
